@@ -1,4 +1,5 @@
-﻿using DesignPatterns.Factory;
+﻿using DesignPatterns.Command;
+using DesignPatterns.Factory;
 using DesignPatterns.Memento;
 using DesignPatterns.State;
 using DesignPatterns.Strategy;
@@ -19,5 +20,7 @@ Console.WriteLine("===========================================");
 MainStrategy3.Main();
 Console.WriteLine("===========================================");
 MainFactory.Main();
+Console.WriteLine("===========================================");
+MainCommand.Main();
 
 Console.ReadLine();

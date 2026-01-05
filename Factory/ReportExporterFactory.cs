@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DesignPatterns.Factory
 {
-    public class ReportExporterFactory
+    internal class ReportExporterFactory
     {
         // good practice
         private readonly Dictionary<Enums, Type> _exporters;
@@ -32,7 +32,7 @@ namespace DesignPatterns.Factory
                 );
         }
 
-        public IReport Create(Enums format)
+        internal IReport Create(Enums format)
         {
 
             if (!_exporters.TryGetValue(format, out var type))
