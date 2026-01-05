@@ -8,65 +8,38 @@ namespace DesignPatterns.Memento
 {
     public class DocumentOriginator
     {
-        private string Content;
-        private int FontSize;
-        private string FontName;
+        private DocumentStateBuilder _state;
 
-        public DocumentOriginator(string content, int fontSize, string fontName)
+        public DocumentOriginator(DocumentStateBuilder state)
         {
-            this.Content = content;
-            this.FontSize = fontSize;
-            this.FontName = fontName;
+            _state = state;
         }
 
-        public void SetContent(string content)
-        {
-            this.Content = content.Trim();
-        }
-
-        public void SetFontSize(int fontSize)
-        {
-            this.FontSize= fontSize;
-        }
-
-        public void SetFontName(string fontName)
-        {
-            this.FontName = fontName;
-        }
-
-        public string GetContent()
-        {
-            return this.Content;
-        }
-
-        public int GetFontSize()
-        {
-            return this.FontSize;
-        }
-
-        public void GetFontName(string fontName)
-        {
-            this.FontName = fontName;
-        }
-
-
-
+        //public void Update(Action<DocumentState> update)
+        //{
+        //    var builder = new DocumentStateBuilder(_state);
+        //    update(builder);
+        //    _state = builder.Build();
+        //}
 
         public DocumentMemento CreateMemento()
         {
-            return new DocumentMemento(Content, FontSize, FontName);
+            return new DocumentMemento(_state);
         }
 
         public void Restore(DocumentMemento memento)
         {
-            Content = memento.Content;
-            FontSize = memento.FontSize;
-            FontName = memento.FontName;
+            _state = memento.State;
         }
 
         public override string ToString()
         {
-            return $"Content={Content}, FontSize={FontSize}, FontName={FontSize}";
+            var properties = _state
+                .GetType()
+                .GetProperties();
+
+            return string.Join(", ",
+                properties.Select(p => $"{p.Name}={p.GetValue(_state)}"));
         }
     }
 }

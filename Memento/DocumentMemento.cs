@@ -8,15 +8,11 @@ namespace DesignPatterns.Memento
 {
     public class DocumentMemento
     {
-        public string Content;
-        public int FontSize;
-        public string FontName;
+        public DocumentStateBuilder State { get; set; }
 
-        public DocumentMemento(string content, int fontSize, string fontName)
+        public DocumentMemento(DocumentStateBuilder state)
         {
-            this.Content = content;
-            this.FontSize = fontSize;
-            this.FontName = fontName;
+            State = state;
         }
     }
 }
